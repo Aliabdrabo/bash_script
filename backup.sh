@@ -7,13 +7,14 @@ function exit_o(){
                   if [[ ${conf,,} == "yes" ]]; then
                          exit
                   elif [[ ${conf,,} == "no" ]]; then
-                          continue
+                          continue 2> /dev/null
                   else
-                          echo "invalid option force exit" 2> /dev/null
-                          exit
+                          echo "invalid option force exit" 
+                          break
                   fi
 
 }
+
 function backup(){
 	echo -e  "<<<<< this function allow you to create backups of files / directories >>>>>\n\n"
 
@@ -21,37 +22,85 @@ function backup(){
 	do
 		read -p " -please enter the path of the file / dir to bs backed up:  " path
 
-		if [ -e "$path" ] && [ -f "$path" ]; then
+		if [ -e "$path" ] && [ -f "$path" ] 2> /dev/null ; then
+			
 			echo -e "\n\n <<<all backups will be created in backup directory>>>\n"
 		        read -p "   -enter name : " name
 			cp "$path" "/home/ali/backups" 2> /dev/null
 			gzip "/home/ali/backups/""$name" 2> /dev/null
-			if [ $? -eq 0 ];then
+			if [ $? -eq 0 ] 2> /dev/null ;then
 				echo " <<<the file has been backed up successfully>>>"
 				ls "/home/ali/backups"
+				read -p "do you want to exit from this operation? ( yes / no ) :  " conf
+                                if [[ ${conf,,} == "yes" ]]; then
+                                       break
+                                elif [[ ${conf,,} == "no" ]]; then
+                                       continue 2> /dev/null
+                                else
+                                       echo "invalid option force exit" 
+                                       break
+                                fi
 			else
-				echo -e "<<<there might be an error please try again>>>\n\n" 2> /dev/null
-				continue
+				
+				echo -e "<<<there might be an error please try again>>>\n\n" 
+			        #breck option
+                                read -p "do you want to exit from this operation? ( yes / no ) :  " conf
+                                if [[ ${conf,,} == "yes" ]]; then
+                                       break
+                                elif [[ ${conf,,} == "no" ]]; then
+                                       continue 2> /dev/null
+                                else
+                                       echo "invalid option force exit" 
+                                       break
+                                fi
+
 			fi
-		elif [ -e "$path" ] && [ -d "$path" ]; then
+		elif [ -e "$path" ] && [ -d "$path" ] 2> /dev/null ; then
+
 		        read -p "please enter backup name:  " backup_name
 			tar czfP "$backup_name" "$path" 2> /dev/null
-			if [ $? -eq 0 ];then
+			if [ $? -eq 0 ] 2> /dev/null;then
 				echo -e "\n"
-                                echo " <<<the directory has been backed up successfully>>>"
-                                
+                                echo -e " <<<the directory has been backed up successfully>>>\n"
+				read -p "do you want to exit from this operation? ( yes / no ) :  " conf
+				echo -e "********************************************************************\n"
+
+                                if [[ ${conf,,} == "yes" ]]; then
+                                       break
+                                elif [[ ${conf,,} == "no" ]]; then
+                                       continue 2> /dev/null
+                                else
+                                       echo "invalid option force exit"
+                                       break
+                                fi
                         else
-                                echo "<<< there might be an error please try again >>>\n\n" 2> /dev/null
-				continue
+                                echo "<<< there might be an error please try again >>>\n\n" 
+				read -p "do you want to exit from this operation? ( yes / no ) :  " conf
+				echo -e "********************************************************************\n"
+                                if [[ ${conf,,} == "yes" ]]; then
+                                       break
+                                elif [[ ${conf,,} == "no" ]]; then
+                                       continue 2> /dev/null
+                                else
+                                       echo "invalid option force exit" 
+                                       break
+                                fi
                         fi
 			mv "$backup_name" "/home/ali/backups" 2> /dev/null
 			echo -e "\n\n" 
 			ls  "/home/ali/backups" 2> /dev/null
 		else
-			echo "<<<< no such file or directory >>>>\n" 2> /dev/null
+			echo "<<<< no such file or directory >>>>\n"
+			read -p "do you want to exit from this operation? ( yes / no ) :  " conf
+                        if [[ ${conf,,} == "yes" ]]; then
+                                break
+                         elif [[ ${conf,,} == "no" ]]; then
+                                 continue 2> /dev/null
+                         else
+                                 echo "invalid option force exit" 
+                                 break
+                         fi
 		fi
-	#exit option
-	exit_o
 	done
 }
 
@@ -72,32 +121,75 @@ function restore() {
 	        if [[ "${path}" =~ \.gz$ ]]; then
 
 			gunzip "$path"
-			if [ $? -eq 0 ];then
+			if [ $? -eq 0 ] 2> /dev/null;then
                                 echo -e "\n"
                                 echo " <<<the directory has been restored successfully>>>"
+				break_o
    
                         else
                                 echo "<<< there might be an error please try again >>>\n\n" 2> /dev/null
-                                exit_o
-				continue
+				if [[ ${conf,,} == "yes" ]]; then
+                                         break
+                                 elif [[ ${conf,,} == "no" ]]; then
+                                        continue 2> /dev/null
+                                 else
+                                        echo "invalid option force exit" 
+                                        break
+                                 fi
                         fi
 		fi	
 
-		if [[ "${path}" =~ \.tar$ ]]; then
+		if [[ "${path}" =~ \.tar$ ]] 2> /dev/null; then
 		        
 			tar -xzvf "$path" 
-			if [ $? -eq 0 ];then
+			if [ $? -eq 0 ] 2> /dev/null;then
                                  echo -e "\n\n"
                                  echo  " <<<the directory has been restored successfully>>>"
- 
-                         else
+				 
+				 if [[ ${conf,,} == "yes" ]]; then
+                                         break
+                                 elif [[ ${conf,,} == "no" ]]; then
+                                         continue 2> /dev/null
+                                 else
+                                         echo "invalid option force exit"
+                                         break
+                                  fi
+
+
+                          else
                                  echo -e "<<< there might be an error please try again >>>\n\n" 2> /dev/null
-                                 exit_o
-				 continue
+				 if [[ ${conf,,} == "yes" ]]; then
+                                         break
+                                 elif [[ ${conf,,} == "no" ]]; then
+                                         continue 2> /dev/null
+                                 else
+                                          echo "invalid option force exit" 
+                                          break
+                                 fi
                          fi
 			
 		fi
 	done
 }	
 
-restore
+while true;
+do
+        echo -e "please choose the option by number: \n [1]Backup. \n [2] Restore. "
+        read number
+        case $number in
+                "1")
+                       backup
+                       exit_o
+                       ;;
+                "2")
+                       restore
+                       exit_o
+                       ;;
+                *)
+                       echo -e "<<<<< invalid option >>>>>>\n"
+                       echo "<<<<<try again >>>>>"
+                       exit_o
+                       ;;
+        esac
+done
+
