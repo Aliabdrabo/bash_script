@@ -1,7 +1,7 @@
 # bash_script
 
 
-![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+![GitHub Logo]([https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png](https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fi%2Fork3nnv4qdt3oedyh12f.png))
 
 
 ## Project Description:-
