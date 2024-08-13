@@ -1,7 +1,7 @@
 # bash_script
 
 
-![Alt text](/home/ali/Downloads/Linux .jpeg)
+![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
 
 
 ## Project Description:-
