@@ -35,7 +35,8 @@ function create_file() {
 	while true ;
 	do
 		
-                read -p " please enter the path of the file : " path
+                read -p " please enter the path of the dir you want to create the file on : " path
+		read -p " please enter the name of the file : " name
 	        touch "$path"
 	        #check if the previous command execute
 	        if [ $? -eq 0 ] 2> /dev/null; then
@@ -213,28 +214,32 @@ do
        case $option in
 	       "1")
 		         create_file
-		         exit_o
+		        # exit_o
 		         ;;
 	        "2")
 		         create_dir
-		         exit_o
+		        # exit_o
 		         ;;
 	        "3")
 		         copy
-		         exit_o
+		         #exit_o
 		         ;;
 	        "4")
 		         move
-		         exit_o
+		         #exit_o
 		         ;;
 	        "5")
 		         rename
-		         exit_o
+		         #exit_o
 		         ;;
 	        "6")
 		         delete
-		         exit_o
+		         #exit_o
 		         ;;
+		"7")  
+		         return
+			 ;;
+			
 	        *)
 		         echo "invalid option please try again"
 		         continue

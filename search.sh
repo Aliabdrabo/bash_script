@@ -76,36 +76,40 @@ function s_file_type() {
 }
 
 function s_file_size(){
+	while true;
+	do
 
-	read -p "please enter size  " size
-	echo -e "please enter the unit of the size b: bytes \n c: blocks (512 bytes) \n k: kilobytes (1024 bytes) \n M: megabytes (1024 * 1024 bytes) \nG: gigabytes (1024 * 1024 * 1024 bytes) "
-	read  unit
-	valid_units=( "b" "c" "k" "M" "G" )
-	if [[ ! "${valid_units[*]}" =~ "$unit" ]] 2> /dev/null; then
-		echo -e "<<<<< invalid unit >>>>>>\n"
-		echo -e "<<<< please notice the case sensativeity valid units is : c , b , k , M , G >>>> \n" 
-		echo -e "****************************************************************************************\n"
-		continue
-	fi	
-        read -p "please enter the path you want to search on:  " path
-        if [ -e "$path" ] && [ -r "$path" ] 2> /dev/null; then
+
+	        read -p "please enter size  " size
+	        echo -e "please enter the unit of the size b: bytes \n c: blocks (512 bytes) \n k: kilobytes (1024 bytes) \n M: megabytes (1024 * 1024 bytes) \nG: gigabytes (1024 * 1024 * 1024 bytes) "
+	        read  unit
+	        valid_units=( "b" "c" "k" "M" "G" )
+	        if [[ ! "${valid_units[*]}" =~ "$unit" ]] 2> /dev/null; then
+		        echo -e "<<<<< invalid unit >>>>>>\n"
+		        echo -e "<<<< please notice the case sensativeity valid units is : c , b , k , M , G >>>> \n" 
+		        echo -e "****************************************************************************************\n"
+		        continue
+	        fi	
+                read -p "please enter the path you want to search on:  " path
+                if [ -e "$path" ] && [ -r "$path" ] 2> /dev/null; then
                 
-		find $path -size "$size""$unit"
+		        find $path -size "$size""$unit"
                 
-		if [ $? -eq 0 ] 2> /dev/null; then
-                        echo "<<<< the file or dir that match the size you enter has been found >>>>"
-			break
-                else
-                        echo "<<<< there's a trouble has occured  please try again >>>>"
-			echo -e "****************************************************************************************\n"
-			continue
-		fi
+		        if [ $? -eq 0 ] 2> /dev/null; then
+                                echo "<<<< the file or dir that match the size you enter has been found >>>>"
+			        break
+                        else
+                                echo "<<<< there's a trouble has occured  please try again >>>>"
+			        echo -e "****************************************************************************************\n"
+			        continue
+		        fi
         
-	else
-                echo -e "<<<<<< no such a file or a dir of the path you entered or permission denied please check and try again >>>>>>\n "
-		continue
+	        else
+                        echo -e "<<<<<< no such a file or a dir of the path you entered or permission denied please check and try again >>>>>>\n "
+		        continue
         
-	fi
+	        fi
+	done
 
 }
 
@@ -172,7 +176,7 @@ do
 		    exit_o
                     ;;
              "3")
-                    s_file_siz
+                    s_file_size
 		    exit_o
                     ;;
              "4")

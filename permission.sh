@@ -7,14 +7,6 @@ function set_per(){
                 read -p "enter user (owner) permission (rwx) : " user
                 read -p "enter group  permission (rwx) : " group
                 read -p "enter others (any other user) permission (rwx) : " others
-                read -p "do you want to exit from this operation? ( yes / no ) :  " conf
-		if [[ ${conf,,} == "yes" ]]; then
-                         break
-                elif [[ ! ${conf,,} =~ "no" ]]; then
-                        echo "invalid option please try again"
-                        continue
-                fi
-
 
                 if [[ ${user} -le 3 && ${group} -le 3 && ${others} -le 3 ]];then
                         echo " valied length "
@@ -42,13 +34,7 @@ function set_per(){
                 echo "<<<< you set permissions successfully >>>>"
                 chmod "u=$user,g=$group,o=$others" "$path"
                 ls -l "$path"
-		read -p "do you want to exit from this operation? ( yes / no ) :  " conf
-		if [[ ${conf,,} == "yes" ]]; then
-                         break
-                elif [[ ! ${conf,,} =~ "no" ]]; then
-                        echo "invalid option please try again"
-                        continue
-                fi
+                break
 
     done
 
@@ -64,10 +50,6 @@ function a_or_s() {
         while true; do
                 read -p "# enter the operator ( + ) for adding permissions ( - ) for removeing permissions : " operator
                 read -p "# enter  permission (rwx) : " permission
-                read -p "# Do you want to exit? (yes/no): " exit_choice
-                if [[ $exit_choice == "yes" ]]; then
-                         exit
-                fi
 
                 if [[ ${permission} -le 3 ]];then
                         echo "# valied length "
@@ -90,7 +72,7 @@ function a_or_s() {
 
                 if [[ ! -e "$path" ]] && [[ ! -w "$path" ]]; then
 
-                        echo"# no such a file or a dir"
+                        echo "# no such a file or a dir"
                         continue
 
                 fi
@@ -102,12 +84,12 @@ function a_or_s() {
 case ${process,,} in
                 "a")
                         chmod "$operator$permission" "$path"
-                        ls -l "$path"
-                        if [[ ${conf,,} == "yes" ]]; then
-                                 break
-                        elif [[ ! ${conf,,} == "no" ]]; then
-                                 echo "invalid option try again"
-				 continue 2> /dev/null
+			if [ $? -eq 0 ];then
+                                ls -l "$path"
+			        
+			else
+				echo " there may a problems"
+
                         fi
 
                         ;;
@@ -115,7 +97,7 @@ case ${process,,} in
                         while true;
                         do
                                read -p "# enter the category you want to modify u / g / o : " category
-                               if [[ ! ${category} =~ ^[ugo]+$ ]]; then
+                               if [[ ! ${category,,} =~ ^[ugo]+$ ]]; then
                                      echo "# invalid category"
                                      read -p "do you want to exit from this operation? ( yes / no ) :  " conf
                                      if [[ ${conf,,} == "yes" ]]; then
@@ -141,6 +123,7 @@ case ${process,,} in
                         ;;
                 *)
                         echo "invalid option"
+			return 
 
                         ;;
         esac
@@ -154,13 +137,6 @@ function num_mode(){
 
         while true; do
                 read -p "# enter  permission (1 2 4 7 6) : " permission
-                read -p "do you want to exit from this operation? ( yes / no ) :  " conf
-                if [[ ${conf,,} == "yes" ]]; then
-                         break
-		elif [[ ! ${conf,,} =~ "no" ]]; then
-			echo "invalid option please try again"
-			continue
-		fi
 
                 if [[ ${#permission} -eq 3 ]]; then
                         echo "# valied length "
@@ -188,13 +164,7 @@ function num_mode(){
                 chmod "$permission" "$path"
                 echo "you set permission sucessfully"
                 ls -l "$path"
-		read -p "do you want to exit from this operation? ( yes / no ) :  " conf
-		if [[ ${conf,,} == "yes" ]]; then
-                         break
-                elif [[ ! ${conf,,} =~ "no" ]]; then
-                        echo "invalid option please try again"
-                        continue
-                fi
+                 break
 
         done
 
@@ -219,13 +189,7 @@ function change_owner() {
                      chown "$new_owner" "$path"
                      if [ $? -eq 0 ]; then
                             echo "Ownership changed successfully for '$path' to '$new_owner'"
-                            read -p "do you want to exit from this operation? ( yes / no ) :  " conf
-                            if [[ ${conf,,} == "yes" ]]; then
-                                     break
-                            elif [[ ! ${conf,,} =~ "no" ]]; then
-                                     echo "invalid option please try again"
-                                     continue
-                            fi
+                            break
 
 		     else
                             echo "Error changing ownership for '$path'"
@@ -273,17 +237,22 @@ function exit_o(){
 
 
 function symbolic_mode(){
-        read -p "[1] for  set / [2] for assigning : " x
+	
 	while true;
         do
+		echo -e "[1]  set\n[2] assigning\n[3] back option"
+		read  x
+
                    case $x in
                             "1")
-                                     symbolic_mode
-				     exit_o
+                                     set_per
                                      ;;
                             "2")
-                                      num_mode
-				      exit_o
+                                      a_or_s
+                                      ;;
+			 
+			    "3")    
+                                      exit
                                       ;;
                             *)
                                       echo " invalied option"
@@ -299,24 +268,26 @@ function symbolic_mode(){
 while true;
 do
 	echo -e "<<<<permission managment>>>>\n\n"
-        read -p "what mode do you want to use? ( [1] for symbolic_mode /[2] for numeric_mode / [3] changeowner user :" mode
+	echo -e "what mode do you want to use?\n[1] for symbolic_mode\n[2] for numeric_mode \n[3] changeowner user\n[4] back option"
+        read  mode
         echo -e "\n\n"
 	case $mode in
                 "1")
                         symbolic_mode
-			exit_o 
                         ;;
                 "2")
                         num_mode
-			exit_o 
                         ;;
 		"3")
 		        change_owner
-			exit_o
 			;;
+		"4")
+		        return
+		        ;;
                 *)
                         echo " invalied option"
 			exit_o 
                         ;;
         esac
-done	
+done
+

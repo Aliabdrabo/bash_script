@@ -128,7 +128,7 @@ function exit_o(){
 while true;
 do
 
-           echo -e "-please choose option by number :-\n[1] basic system information. \n[2] Cpu usage mentoring. \n[3] memory usage mentoring. \n[4] Disk space mentoring \n[5] logging and reporting."
+           echo -e "-please choose option by number :-\n[1] basic system information. \n[2] Cpu usage mentoring. \n[3] memory usage mentoring. \n[4] Disk space mentoring \n[5] logging and reporting\n[6] back option."
            
 	   read  number
 
@@ -154,6 +154,9 @@ do
 			  report
 			  exit_o
 	                  ;;
+		   "6")
+		          return
+			  ;;
 	           *)
 	                  echo -e "\n<<<< invalid option please try again >>>>"
 	                  exit_o
