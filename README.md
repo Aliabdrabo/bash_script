@@ -84,18 +84,18 @@ Generate a summary report of system metrics and save it to a specified location.
 
 ## additional tasks
 
-###Interactive Menu:-
+Interactive Menu:-
 
 Create an interactive menu that presents users with options for System Monitoring options or different file management operations.
 Use select statement to display menu options and handle user input.
 Provide an interactive menu for users to choose which system metrics to monitor.
 
-###Error Handling:-
+Error Handling:-
 
 Implement error handling mechanisms to validate user input and handle exceptions gracefully.
 Provide informative error messages when operations fail due to incorrect input or other issues.
 
-###Confirmation Prompts:-
+Confirmation Prompts:-
 
 Include confirmation prompts for critical operations such as file deletion and renaming.
 Ensure that users confirm their actions before proceeding to avoid accidental data loss.
