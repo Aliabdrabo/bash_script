@@ -156,7 +156,7 @@ function delete(){
 	       read -p "please enter the type directory/file : " type
 	       echo -e "***************************************************\n"
 
-	       read -p "please enter name of the $type : " name
+	       read -p "please enter path of the $type : " name
 	       echo -e "***************************************************\n"
 
 	       read -p " are you sure you want to delet this $type y/n : " conf
@@ -164,7 +164,7 @@ function delete(){
 
 	       if [[  ${conf,,} = "y" ]]; then
 
-		       if [[ -x "$(dirname "$name")" ]]; then
+		       if [[ -x "$(dirname "$name")" ]] && [[ -f "$name" ]] ; then
 
 			        if [[ ${type,,} = "file" ]]; then
 				       rm "$name"
@@ -177,7 +177,7 @@ function delete(){
 					       continue
 				       fi 
 
-			         elif [[ ${type,,} = "directory" ]]; then
+			         elif [[ ${type,,} = "directory" ]] && [[ -d "$name" ]]; then
 
 				       rmdir "$name"
 				       if [ $? -eq 0 ] 2> /dev/null; then
@@ -208,36 +208,36 @@ do
 
        echo "<<<< welcom to file & dir mangment >>>>"
        echo -e "********************************************************************************************\n"
-       echo -e "please enter the option by it's number  to use it :- \n [1] create_file. \n [2] create_dir. \n [3] copy. \n [4] move. \n [5] rename. \n [6] delete. \n >>>>> :" 
+       echo -e "please enter the option by it's number  to use it :- \n [1] create_file. \n [2] create_dir. \n [3] copy. \n [4] move. \n [5] rename. \n [6] delete. \n [7] back option :" 
        read option
 
        case $option in
 	       "1")
 		         create_file
-		        # exit_o
+		         exit_o
 		         ;;
 	        "2")
 		         create_dir
-		        # exit_o
+		         exit_o
 		         ;;
 	        "3")
 		         copy
-		         #exit_o
+		         exit_o
 		         ;;
 	        "4")
 		         move
-		         #exit_o
+		         exit_o
 		         ;;
 	        "5")
 		         rename
-		         #exit_o
+		         exit_o
 		         ;;
 	        "6")
 		         delete
-		         #exit_o
+		         exit_o
 		         ;;
 		"7")  
-		         return
+		         exit
 			 ;;
 			
 	        *)

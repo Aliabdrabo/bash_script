@@ -282,7 +282,7 @@ do
 		        change_owner
 			;;
 		"4")
-		        return
+		        exit
 		        ;;
                 *)
                         echo " invalied option"

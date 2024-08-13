@@ -163,7 +163,7 @@ while true;
 do
 
         echo "file search sytem "
-        echo -e " which of criteria you want to find the files with (please enter the criteria you want by it's number)? \n[1] s_file_name.\n[2] s_file_type.\n[3] s_file_size. \n[4] s_file_mod_time." 
+        echo -e " which of criteria you want to find the files with (please enter the criteria you want by it's number)? \n[1] s_file_name.\n[2] s_file_type.\n[3] s_file_size. \n[4] s_file_mod_time\n[5] back option." 
         read criteria
 
         case $criteria in
@@ -183,6 +183,8 @@ do
                     s_file_mod_time
 		    exit_o
                     ;;
+	     "5")
+	            exit
              *)
                     echo "invalid criteria  please try again or write the command manually and try"
 		    read -p " if you want to write your command manually please enter y if not enter n " con

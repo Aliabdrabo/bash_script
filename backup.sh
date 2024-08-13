@@ -112,7 +112,7 @@ function restore() {
 
 
 	        echo -e "<<<< this function restore data when needed >>>> \n\n"
-	        read  -p " -enter the compressed file name:  " path
+	        read  -p " -enter the compressed file path :  " path
 
 		if [[ ! -f "$compressed_file" || ! "${compressed_file}" =~ \.(gz|tar)+$ ]]; then
                         echo " Invalid compressed file specified: $path " 2> /dev/null
@@ -124,49 +124,26 @@ function restore() {
 			if [ $? -eq 0 ] 2> /dev/null;then
                                 echo -e "\n"
                                 echo " <<<the directory has been restored successfully>>>"
-				break_o
+				break
    
                         else
-                                echo "<<< there might be an error please try again >>>\n\n" 2> /dev/null
-				if [[ ${conf,,} == "yes" ]]; then
-                                         break
-                                 elif [[ ${conf,,} == "no" ]]; then
                                         continue 2> /dev/null
-                                 else
                                         echo "invalid option force exit" 
-                                        break
-                                 fi
                         fi
 		fi	
 
 		if [[ "${path}" =~ \.tar$ ]] 2> /dev/null; then
 		        
-			tar -xzvf "$path" 
+			tar -xvf "$path" 2> /dev/null
 			if [ $? -eq 0 ] 2> /dev/null;then
                                  echo -e "\n\n"
                                  echo  " <<<the directory has been restored successfully>>>"
-				 
-				 if [[ ${conf,,} == "yes" ]]; then
-                                         break
-                                 elif [[ ${conf,,} == "no" ]]; then
-                                         continue 2> /dev/null
-                                 else
-                                         echo "invalid option force exit"
-                                         break
-                                  fi
-
-
-                          else
+                                 break
+                                  
+                        else
                                  echo -e "<<< there might be an error please try again >>>\n\n" 2> /dev/null
-				 if [[ ${conf,,} == "yes" ]]; then
-                                         break
-                                 elif [[ ${conf,,} == "no" ]]; then
                                          continue 2> /dev/null
-                                 else
-                                          echo "invalid option force exit" 
-                                          break
-                                 fi
-                         fi
+                        fi
 			
 		fi
 	done
@@ -174,17 +151,20 @@ function restore() {
 
 while true;
 do
-        echo -e "please choose the option by number: \n [1]Backup. \n [2] Restore. "
+        echo -e "please choose the option by number: \n [1]Backup. \n [2] Restore \n [3] back option. "
         read number
         case $number in
                 "1")
                        backup
-                       exit_o
+                       #exit_o
                        ;;
                 "2")
                        restore
-                       exit_o
+                      # exit_o
                        ;;
+		"3")
+		      exit
+		      ;;
                 *)
                        echo -e "<<<<< invalid option >>>>>>\n"
                        echo "<<<<<try again >>>>>"

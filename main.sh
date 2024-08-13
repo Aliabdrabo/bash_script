@@ -70,16 +70,19 @@ echo -e "***************************************************************\n\n"
 
 while true;
 do
-	echo -e " please enter the the process by it's number:-\n[1] File and directory management.\n[2] System monitoring."
+	echo -e " please enter the the process by it's number:-\n[1] File and directory management.\n[2] System monitoring\n[3] exit."
 	read number
 	case $number in
 	        "1")
 		       fd_m
-		       exit_o
+		      # exit_o
 		       ;;
 		"2")
 		       ./sys.sh
-		       exit_o
+		       #:exit_o
+		       ;;
+		"3")
+		       exit
 		       ;;
 		*)
 		       echo "invalid option "

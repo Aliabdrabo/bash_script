@@ -42,10 +42,12 @@ function cpu(){
 function memory(){
 	echo -e "\n<<<<<  displaying the memory usage percentage & swap memory usage for  processes of th system >>>>>\n"
         echo -e "*********************************************************************************************************\n\n"
-	mem_usage=$(free -m | grep "Mem:" | awk '{print $3/$2 * 100.0}')
         swap_mem=$(free -m | awk '/Swap/ { print $3 / $2 * 100 }')
-
-        echo -e " Memory usage percentage -->> $mem_usage\nswap memory perserntage -->> $swap_mem"
+        total_mem=$(free -h | grep Mem: | awk '{print $2}')
+	used_mem=$(free -h | grep Mem: | awk '{print $4}')
+	free_mem=$(free -h | grep Mem: | awk '{print $4}')
+	available_mem=$(free -h | grep Mem: | awk '{print $7}')
+        echo -e " total Memory -->> $total_mem\nused memory -->> $used_mem\nfree memory -->> $free_mem\navailable memory-->> $available_mem\nswap memory perserntage -->> $swap_mem"
 	echo -e "\n*******************************************************"
 
 
@@ -57,11 +59,8 @@ function memory(){
 function disk_space(){
 	echo -e "\n<<<<<  displaying the total disk space, used space, and available space for each mounted filesystem >>>>>\n"
         echo -e "******************************************************************************************************\n"
-        disk_usage=$(df -h / | grep "/$" | awk '{print $5}')
-        free_space=$(free -m | grep "Mem:" | awk '{print ($2-$3)/$2 * 100.0}')
-	echo -e "-disk usage : $disk_usage \n-free space : $free_space\n "
 	echo -e "\n\n"
-	df -ah
+	df -h --total
 	echo -e "\n*******************************************************************************************************\n"
 }
 
@@ -155,7 +154,7 @@ do
 			  exit_o
 	                  ;;
 		   "6")
-		          return
+		          exit
 			  ;;
 	           *)
 	                  echo -e "\n<<<< invalid option please try again >>>>"
