@@ -40,10 +40,12 @@ function cpu(){
 
 
 function memory(){
-	echo -e "\n<<<<<  displaying the memory usage percentage for  processes of th system >>>>>\n"
-        echo -e "******************************************************************************************************\n\n"
+	echo -e "\n<<<<<  displaying the memory usage percentage & swap memory usage for  processes of th system >>>>>\n"
+        echo -e "*********************************************************************************************************\n\n"
 	mem_usage=$(free -m | grep "Mem:" | awk '{print $3/$2 * 100.0}')
-        echo " Memory usage percentage -->> $mem_usage"
+        swap_mem=$(free -m | awk '/Swap/ { print $3 / $2 * 100 }')
+
+        echo -e " Memory usage percentage -->> $mem_usage\nswap memory perserntage -->> $swap_mem"
 	echo -e "\n*******************************************************"
 
 
@@ -149,7 +151,7 @@ do
 			  exit_o
 	                  ;;
 	           "5")
-	                  report
+			  report
 			  exit_o
 	                  ;;
 	           *)
