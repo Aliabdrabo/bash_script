@@ -162,7 +162,8 @@ function s_file_mod_time(){
 while true;
 do
 
-        echo "file search sytem "
+        echo "<<<< file search sytem >>>>"
+	echo "============================================="
         echo -e " which of criteria you want to find the files with (please enter the criteria you want by it's number)? \n[1] s_file_name.\n[2] s_file_type.\n[3] s_file_size. \n[4] s_file_mod_time\n[5] back option." 
         read criteria
 
