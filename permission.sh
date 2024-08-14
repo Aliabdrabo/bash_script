@@ -41,7 +41,7 @@ function set_per(){
 }
 
 
-
+##############################################################################################################
 
 function a_or_s() {
 
@@ -129,7 +129,7 @@ case ${process,,} in
         esac
 }
 
-
+#############################################################################################################
 
 function num_mode(){
         echo "<<<< this function allow you to change the permissions by numiric values>>>>"
@@ -170,7 +170,8 @@ function num_mode(){
 
 }
 
-
+##########################################################################################################
+ 
 function change_owner() {
         while true ;
         do
@@ -268,21 +269,26 @@ function symbolic_mode(){
 while true;
 do
 	echo -e "<<<<permission managment>>>>\n\n"
+        echo "=============================================="
 	echo -e "what mode do you want to use?\n[1] for symbolic_mode\n[2] for numeric_mode \n[3] changeowner user\n[4] back option"
         read  mode
         echo -e "\n\n"
 	case $mode in
                 "1")
                         symbolic_mode
+			echo -e "*****************************************************************\n"
                         ;;
                 "2")
                         num_mode
+			echo -e "*****************************************************************\n"
                         ;;
 		"3")
 		        change_owner
+                        echo -e "*****************************************************************\n"	  
 			;;
 		"4")
 		        exit
+	                echo -e "*****************************************************************\n"
 		        ;;
                 *)
                         echo " invalied option"
