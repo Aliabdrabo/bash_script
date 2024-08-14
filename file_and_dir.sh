@@ -37,10 +37,11 @@ function create_file() {
 		
                 read -p " please enter the path of the dir you want to create the file on : " path
 		read -p " please enter the name of the file : " name
-	        touch "$path"
+	        touch "$path/$name"
 	        #check if the previous command execute
 	        if [ $? -eq 0 ] 2> /dev/null; then
 		       echo -e "<<<<file is created successfully>>>>\n"
+	               ls -l "$path/$name" 
 		       echo -e "*********************************************************************\n\n"
 		       break
 	        else
@@ -57,11 +58,12 @@ function create_dir(){
 	do
 
                 read -p " please enter the path of the directory : " path
+		read -p " please enter the name of the directory : " name
 	        echo -e "*****************************************************************************\n\n"
-                mkdir "$path"
+                mkdir "$path/$name"
                 if [ $? -eq 0 ] 2> /dev/null ; then
                          echo -e "<<<<file is created successfully>>>>\n"
-		         echo -e"*****************************************************************************\n\n"
+		         ls -l "$path/$name"
 		         break
                 else    
                          echo "erro creating directory please try again"
@@ -207,37 +209,45 @@ while true;
 do
 
        echo "<<<< welcom to file & dir mangment >>>>"
-       echo -e "********************************************************************************************\n"
+       echo -e "==========================================================\n"
        echo -e "please enter the option by it's number  to use it :- \n [1] create_file. \n [2] create_dir. \n [3] copy. \n [4] move. \n [5] rename. \n [6] delete. \n [7] back option :" 
        read option
 
        case $option in
 	       "1")
 		         create_file
-		         exit_o
+                         echo -e "****************************************************************************\n"	   
+		        # exit_o
 		         ;;
 	        "2")
 		         create_dir
-		         exit_o
+		         echo -e "****************************************************************************\n"
+	                 #exit_o
 		         ;;
 	        "3")
 		         copy
-		         exit_o
+		         echo -e "****************************************************************************\n"
+	                 #exit_o
 		         ;;
 	        "4")
 		         move
-		         exit_o
+		          echo -e "****************************************************************************\n"
+	                 #exit_o
 		         ;;
 	        "5")
 		         rename
-		         exit_o
+		         echo -e "****************************************************************************\n"
+	                 #exit_o
 		         ;;
 	        "6")
 		         delete
-		         exit_o
+		          echo -e "****************************************************************************\n"
+	                 #exit_o
 		         ;;
 		"7")  
 		         exit
+	                 echo -e "****************************************************************************\n"
+	                 #exit_o
 			 ;;
 			
 	        *)
