@@ -186,6 +186,7 @@ do
                     ;;
 	     "5")
 	            exit
+                    ;;	      
              *)
                     echo "invalid criteria  please try again or write the command manually and try"
 		    read -p " if you want to write your command manually please enter y if not enter n " con
