@@ -151,24 +151,29 @@ function restore() {
 
 while true;
 do
-        echo -e "please choose the option by number: \n [1]Backup. \n [2] Restore \n [3] back option. "
+        echo "<<<<< backup & restore >>>>>"
+	echo"============================================="
+	echo -e "please choose the option by number: \n [1]Backup. \n [2] Restore \n [3] back option. "
         read number
         case $number in
                 "1")
                        backup
-                       #exit_o
+                       echo -e "*************************************************************************\n"
+		       #exit_o
                        ;;
                 "2")
                        restore
-                      # exit_o
+                       echo -e "*************************************************************************\n"
+		      # exit_o
                        ;;
 		"3")
 		      exit
-		      ;;
+		      echo -e "*************************************************************************\n"
+	              ;;
                 *)
                        echo -e "<<<<< invalid option >>>>>>\n"
                        echo "<<<<<try again >>>>>"
-                       exit_o
+                       #exit_o
                        ;;
         esac
 done
