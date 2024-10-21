@@ -105,6 +105,6 @@ Ensure that users confirm their actions before proceeding to avoid accidental da
 ```bash
 ./main.sh
 ```
-this block to run the main script that which links all the texts together.
+this block to run the main script that which links all the scripts together.
 
 
