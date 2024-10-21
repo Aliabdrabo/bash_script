@@ -1,7 +1,7 @@
 # bash_script
 
 
-![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+![ Logo]([https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png](https://github.com/Aliabdrabo/bash_script/blob/main/Introduction%20To%20BASH%20Scripting%20-%20Learn%20BASH%20_%20Part%201.jpeg))
 
 ## Project Description:-
 Develop a Bash script that monitors various aspects of a Linux system and provides real-time insights into system performance. This project will allow you to practice Bash scripting fundamentals while creating a tool that can be used to monitor CPU usage, memory usage and disk space. The script will display the collected data in a user-friendly format and provide alerts for potential issues & develop a tool that helps users manage files and directories efficiently. The script will provide functionalities such as creating, copying, moving, renaming, and deleting files and directories, as well as searching for files based on specified criteria.
