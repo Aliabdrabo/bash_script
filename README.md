@@ -1,7 +1,7 @@
 # bash_script
 
 
-![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+![bash](Introduction To BASH Scripting - Learn BASH _ Part 1.jpeg)
 
 
 ## Project Description:-
